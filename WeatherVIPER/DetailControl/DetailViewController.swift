@@ -61,7 +61,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = "Ощущается как"
-            cell.detailTextLabel?.text = String(format: "%.0f", (wether?.main.feelsLike)!) + " ºC"
+            cell.detailTextLabel?.text = String(format: "%.0f", (wether?.main.feels_like)!) + " ºC"
         case 1:
             cell.textLabel?.text = "Максимальная температура"
             cell.detailTextLabel?.text = String(format: "%.0f", (wether?.main.temp_max)!) + " ºC"

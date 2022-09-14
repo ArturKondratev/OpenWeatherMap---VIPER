@@ -17,5 +17,6 @@ class ListRouter: ListRouterProtocol {
         let vc = DetailModuleBuilder.build(city: city)
         viewController?.present(vc, animated: true, completion: nil)
         
+        
     }
 }
