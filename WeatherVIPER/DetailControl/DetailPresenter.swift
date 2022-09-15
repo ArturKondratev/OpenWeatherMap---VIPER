@@ -1,12 +1,13 @@
 //
 //  DetailPresenter.swift
-//  Super easy dev
+//  WeatherVIPER
 //
 //  Created by Артур Кондратьев on 13.09.2022
 //
 
 protocol DetailPresenterProtocol: AnyObject {
     func viewDidLoaded()
+    func wetherDidLoaded(wether: [WeatherModel])
 }
 
 class DetailPresenter {
@@ -24,5 +25,10 @@ extension DetailPresenter: DetailPresenterProtocol {
     func viewDidLoaded() {
         let currentWether = interactor.getCurrentWether()
         view?.showCurrentWether(city: currentWether)
+        interactor.getWeather5days(lat: currentWether.coord.lat, lon: currentWether.coord.lon)
+    }
+    
+    func wetherDidLoaded(wether: [WeatherModel]) {
+        view?.showWeather5day(wether: wether)
     }
 }

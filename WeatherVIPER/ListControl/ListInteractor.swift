@@ -1,6 +1,6 @@
 //
 //  ListInteractor.swift
-//  Super easy dev
+//  WeatherVIPER
 //
 //  Created by Артур Кондратьев on 07.09.2022
 //

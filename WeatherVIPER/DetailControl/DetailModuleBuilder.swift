@@ -1,6 +1,6 @@
 //
 //  DetailModuleBuilder.swift
-//  Super easy dev
+//  WeatherVIPER
 //
 //  Created by Артур Кондратьев on 13.09.2022
 //

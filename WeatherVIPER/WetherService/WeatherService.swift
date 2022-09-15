@@ -38,7 +38,8 @@ class WeatherService {
     private let appid = "72965576fb92c60c88c041120952d468"
     private let decoder = JSONDecoder()
     
-    func getCurrentWeather(city: String, completionHandler: @escaping (WeatherData) -> Void) {
+    func getCurrentWeather(city: String,
+                           completionHandler: @escaping (WeatherData) -> Void) {
         
         getCoordinate(city: city) { coordinate, error in
             guard let coordinate = coordinate, error == nil else { return }
@@ -49,16 +50,17 @@ class WeatherService {
         }
     }
     
-    private func fetchCurrentWeather(latitude: Double, longtitude: Double, completionHandler: @escaping (WeatherData) -> Void ) {
+    private func fetchCurrentWeather(latitude: Double,
+                                     longtitude: Double,
+                                     completionHandler: @escaping (WeatherData) -> Void ) {
         
         let params: [String: String] = [ "lat" : "\(latitude)"   ,
                                          "lon" : "\(longtitude)" ]
-        
+
         let url = configureUrl(method: .currentWether,
                                httpMethod: .get,
                                params: params)
         print(url)
-        
         let task = session.dataTask(with: url) { data, response, error in
             guard let data = data else { return }
             do {
@@ -66,6 +68,32 @@ class WeatherService {
                 completionHandler(result)
             } catch {
                 print(error)
+            }
+        }
+        task.resume()
+    }
+    
+    func fetch5day(latitude: Double,
+                   longtitude: Double,
+                   interval: Int?,
+                   completionHandler: @escaping ([WeatherModel]) -> Void ) {
+        
+        var params: [String: String] = [ "lat" : "\(latitude)"   ,
+                                         "lon" : "\(longtitude)" ]
+        if interval != nil {
+            params.updateValue("\(interval!)", forKey: "cnt")
+        }
+        let url = configureUrl(method: .getFiveDay,
+                               httpMethod: .get,
+                               params: params)
+        print(url)
+        let task = session.dataTask(with: url) { data, response, error in
+            guard let data = data else { return }
+            do {
+                let result = try self.decoder.decode(WeatherResponse.self, from: data)
+                completionHandler(result.list)
+            } catch {
+               print(error)
             }
         }
         task.resume()

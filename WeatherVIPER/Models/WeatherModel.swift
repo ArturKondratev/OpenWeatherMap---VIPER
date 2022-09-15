@@ -1,49 +1,25 @@
-////
-////  WeatherModel.swift
-////  WeatherVIPER
-////
-////  Created by Артур Кондратьев on 07.09.2022.
-////
 //
-//import Foundation
+//  WeatherModel.swift
+//  WeatherVIPER
 //
-//struct WeatherResponse: Decodable {
-//    let list: WeatherModel
-//}
+//  Created by Артур Кондратьев on 07.09.2022.
 //
-//struct WeatherModel: Decodable {
-//    var cityName: String?
-//    var dt: Double
-//    var temp: Double
-//    var pressure: Double
-//    var humidity: Int
-//    var weatherName: String
-//    var weatherIcon: String
-//    var windSpeed: Double
-//    var windDegrees: Double
-//
-//    enum CodingKeys: String, CodingKey {
-//        case dt
-//        case main
-//        case weather
-//        case wind
-//    }
-//    enum MainKeys: String, CodingKey {
-//        case temp
-//        case pressure
-//        case humidity
-//    }
-//    enum WeatherKeys: String, CodingKey {
-//        case main
-//        case icon
-//    }
-//    enum WindKeys: String, CodingKey {
-//        case speed
-//        case deg
-//    }
-//
+
+import Foundation
+
+struct WeatherResponse: Decodable {
+    let list: [WeatherModel]
+}
+
+struct WeatherModel: Codable {
+    let dt: Double
+    let main: Main
+    let weather: [Weather]
+    
+
+
 //    init(from decoder: Decoder) throws {
-//        
+//
 //        let values = try decoder.container(keyedBy: CodingKeys.self)
 //        self.dt = try values.decode(Double.self, forKey: .dt)
 //
@@ -61,5 +37,5 @@
 //        self.windSpeed = try windValues.decode(Double.self, forKey: .speed)
 //        self.windDegrees = try windValues.decode(Double.self, forKey: .deg)
 //    }
-//
-//}
+
+}

@@ -1,6 +1,6 @@
 //
 //  ListViewController.swift
-//  Super easy dev
+//  WeatherVIPER
 //
 //  Created by Артур Кондратьев on 07.09.2022
 //
@@ -17,7 +17,6 @@ class ListViewController: UIViewController {
     var presenter: ListPresenterProtocol?
     var weather: [WeatherData] = []
     @IBOutlet weak var tableView: UITableView!
-    
     
     // MARK: - View lifecycle
     override func viewDidLoad() {

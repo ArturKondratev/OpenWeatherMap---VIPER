@@ -1,6 +1,6 @@
 //
 //  DetailViewController.swift
-//  Super easy dev
+//  WeatherVIPER
 //
 //  Created by Артур Кондратьев on 13.09.2022
 //
@@ -9,13 +9,15 @@ import UIKit
 
 protocol DetailViewProtocol: AnyObject {
     func showCurrentWether(city: WeatherData)
-    
+    func showWeather5day(wether: [WeatherModel])
 }
 
 class DetailViewController: UIViewController {
     // MARK: - Public
     var presenter: DetailPresenterProtocol?
     var wether: WeatherData?
+    
+    private var galleryCollectionView = GalleryCollectionView()
     
     @IBOutlet weak var conditionLable: UILabel!
     @IBOutlet weak var cityNameLable: UILabel!
@@ -35,6 +37,15 @@ class DetailViewController: UIViewController {
 // MARK: - Private functions
 private extension DetailViewController {
     func initialize() {
+        tableView.showsVerticalScrollIndicator = false
+        tableView.showsHorizontalScrollIndicator = false
+        
+        view.addSubview(galleryCollectionView)
+        
+        galleryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        galleryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        galleryCollectionView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 10).isActive = true
+        galleryCollectionView.heightAnchor.constraint(equalToConstant: 150).isActive = true
     }
     
     static let dateFormatter: DateFormatter = {
@@ -97,6 +108,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
 
 // MARK: - DetailViewProtocol
 extension DetailViewController: DetailViewProtocol {
+    
     func showCurrentWether(city: WeatherData) {
         self.wether = city
         DispatchQueue.main.async {
@@ -105,5 +117,9 @@ extension DetailViewController: DetailViewProtocol {
             self.conditionLable.text = DataSource.weatherIDs[city.weather[0].id]
             self.temperatureLable.text = String(format: "%.0f",city.main.temp) + " ºC"
         }
+    }
+    
+    func showWeather5day(wether: [WeatherModel]) {
+        self.galleryCollectionView.set(wether: wether)
     }
 }
