@@ -16,4 +16,5 @@
 
 :white_check_mark: Сетевой слой
   + URLSession
-  
+    
+  <img src="https://github.com/ArturKondratev/OpenWeatherMap---VIPER/blob/main/Screen/Rec.gif" width="250">
