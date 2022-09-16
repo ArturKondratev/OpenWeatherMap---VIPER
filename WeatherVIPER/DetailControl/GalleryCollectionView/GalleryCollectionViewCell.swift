@@ -49,7 +49,7 @@ class GalleryCollectionViewCell: UICollectionViewCell {
         addSubview(temperatureLabel)
         addSubview(mainImageView)
         
-        backgroundColor = .white
+        backgroundColor = .systemCyan
         
         // dateLabel constraints
         dateLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
